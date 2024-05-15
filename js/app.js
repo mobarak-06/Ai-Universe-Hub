@@ -42,6 +42,7 @@ const displayData = (data) => {
 };
 
 const showModal = async (id) =>{
+  showLoadingSpinner(true)
   // console.log(id);
     const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
     const data = await res.json();
@@ -89,9 +90,19 @@ const showModal = async (id) =>{
     </div>
     `
     modalContainer.appendChild(div);
-  
+  showLoadingSpinner(false);
     // modal
     my_modal_api.showModal()
+}
+
+
+const showLoadingSpinner = (isLoading) =>{
+ const loadSpinner = document.getElementById('loading-spinner');
+ if (isLoading) {
+  loadSpinner.classList.remove('hidden');
+ } else {
+  loadSpinner.classList.add('hidden');
+ }
 }
 
 loadData();
